@@ -1,0 +1,21 @@
+---
+kind: DaemonSet
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name:
+
+podSecurityContext: {}
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 2020
+  labels: {}
+
+serviceMonitor:
+  enabled: false
+
+prometheusRule:
+  enabled: false
