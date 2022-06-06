@@ -8,7 +8,7 @@ metadata:
   labels:
     name: fluentbit
 spec:
-  project: default
+  project: monitoring
   source:
     repoURL: https://fluent.github.io/helm-charts
     targetRevision: 0.20.1
