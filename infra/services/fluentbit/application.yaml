@@ -18,7 +18,6 @@ spec:
       version: v2
       valueFiles:
       - values.yaml
-
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: monitoring
