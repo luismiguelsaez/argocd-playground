@@ -14,8 +14,6 @@ spec:
     targetRevision: "0.20.1"
     chart: fluent-bit
     helm:
-      releaseName: fluent-bit
-      version: v2
       values: |
         ingress:
           enabled: false

@@ -14,8 +14,6 @@ spec:
     targetRevision: "3.8.2"
     chart: metrics-server
     helm:
-      releaseName: metrics-server
-      version: v2
       values: |
         apiService:
           insecureSkipTLSVerify: false
