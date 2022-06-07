@@ -11,7 +11,7 @@ spec:
   project: monitoring
   source:
     repoURL: https://fluent.github.io/helm-charts
-    targetRevision: 0.20.1
+    targetRevision: "0.20.1"
     chart: fluent-bit
     helm:
       releaseName: fluent-bit
