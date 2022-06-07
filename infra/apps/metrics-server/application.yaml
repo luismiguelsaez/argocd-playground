@@ -23,8 +23,6 @@ spec:
           - --secure-port=4443
           - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
           - --kubelet-use-node-status-port
-      valueFiles:   # Value files expected to be available in the chart repo
-      - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system
