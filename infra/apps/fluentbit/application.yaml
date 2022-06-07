@@ -15,7 +15,7 @@ spec:
     chart: fluent-bit
     helm:
       valueFiles:   # Value files expected to be available in the chart repo
-      - values.yaml
+      - values-notfound.yaml
       values: |- # Values added locally
         resources:
           limits:
