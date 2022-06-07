@@ -3,4 +3,4 @@ kind: Kustomization
 
 resources:
   - metrics-server.yaml
-  - fluent-bit.yaml
+  - fluent-bit/fluent-bit.yaml
