@@ -15,15 +15,7 @@ spec:
     chart: fluent-bit
     helm:
       valueFiles:   # Value files expected to be available in the chart repo
-      - values-notfound.yaml
-      values: |- # Values added locally
-        resources:
-          limits:
-            cpu: 150m
-            memory: 256Mi
-          requests:
-            cpu: 100m
-            memory: 128Mi
+      - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
