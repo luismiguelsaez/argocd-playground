@@ -10,6 +10,8 @@ metadata:
     project: api
     service: api
     cluster: main
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   project: api
   source:
