@@ -15,7 +15,7 @@ spec:
     chart: metrics-server
     helm:
       valueFiles:   # Value files expected to be available in the chart repo
-      - ./values.yaml
+      - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system
