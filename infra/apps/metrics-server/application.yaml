@@ -14,17 +14,17 @@ spec:
     targetRevision: "3.8.2"
     chart: metrics-server
     helm:
+      values: |-
+        apiService:
+          insecureSkipTLSVerify: false
+        args:
+          - --kubelet-insecure-tls
+          - --cert-dir=/tmp
+          - --secure-port=4443
+          - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+          - --kubelet-use-node-status-port
       valueFiles:   # Value files expected to be available in the chart repo
       - values.yaml
-      #values: |-
-      #  apiService:
-      #    insecureSkipTLSVerify: false
-      #  args:
-      #    - --kubelet-insecure-tls
-      #    - --cert-dir=/tmp
-      #    - --secure-port=4443
-      #    - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
-      #    - --kubelet-use-node-status-port
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system
