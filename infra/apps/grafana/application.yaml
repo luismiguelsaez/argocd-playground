@@ -11,7 +11,7 @@ spec:
   project: monitoring
   source:
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: "7.9.3"
+    targetRevision: "6.29.5"
     chart: grafana
     helm:
       values: |-
