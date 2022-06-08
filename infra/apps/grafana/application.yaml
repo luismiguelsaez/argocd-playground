@@ -33,7 +33,7 @@ spec:
           tlsConfig: {}
           scrapeTimeout: 30s
           relabelings: []
-        datasources: {}
+        datasources:
           datasources.yaml:
             apiVersion: 1
             datasources:
