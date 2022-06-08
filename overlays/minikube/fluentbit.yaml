@@ -27,7 +27,7 @@ spec:
         config:
           service: |
             [SERVICE]
-            Daemon Off
+              Daemon Off
               Flush {{ .Values.flush }}
               Log_Level {{ .Values.logLevel }}
               Parsers_File parsers.conf
