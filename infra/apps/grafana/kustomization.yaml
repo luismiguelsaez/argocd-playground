@@ -3,3 +3,8 @@ kind: Kustomization
 
 resources:
   - application.yaml
+
+secretGenerator:
+- name: grafana-datasources
+  files:
+  - datasources.yaml
