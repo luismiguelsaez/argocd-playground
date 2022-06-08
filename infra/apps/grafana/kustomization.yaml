@@ -4,15 +4,15 @@ kind: Kustomization
 resources:
   - application.yaml
 
-secretGenerator:
-- name: grafana-datasources
-  namespace: monitoring
-  files:
-  - datasources.yaml
-
-vars:
-  - name: DS_SECRET
-    objref:
-      kind: Secret
-      apiVersion: v1
-      name: grafana-datasources
+#secretGenerator:
+#- name: grafana-datasources
+#  namespace: monitoring
+#  files:
+#  - datasources.yaml
+#
+#vars:
+#  - name: DS_SECRET
+#    objref:
+#      kind: Secret
+#      apiVersion: v1
+#      name: grafana-datasources
