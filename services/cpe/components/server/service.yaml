@@ -4,6 +4,7 @@ metadata:
   labels:
     app: cpe-server
   name: cpe-server
+  namespace: cpe
 spec:
   ports:
   - name: http
