@@ -52,10 +52,7 @@ spec:
               Keep_Log Off
               K8S-Logging.Parser On
               K8S-Logging.Exclude On
-          outputs: |
-            [OUTPUT]
-              Name stdout
-              Match kube.*
+          outputs: ""
           customParsers: |
             [PARSER]
                 Name docker_no_time
