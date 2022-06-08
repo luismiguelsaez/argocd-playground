@@ -9,3 +9,10 @@ secretGenerator:
   namespace: monitoring
   files:
   - datasources.yaml
+
+vars:
+  - name: DS_SECRET
+    objref:
+      kind: Secret
+      apiVersion: v1
+      name: grafana-datasources
