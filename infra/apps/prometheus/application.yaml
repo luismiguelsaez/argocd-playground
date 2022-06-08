@@ -11,20 +11,29 @@ spec:
   project: monitoring
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: "35.5.1"
-    chart: kube-prometheus-stack
+    targetRevision: "15.9.1"
+    chart: prometheus
     helm:
       values: |
-        prometheus:
+        server:
+          replicaCount: 1
+          retention: "1d"
+          statefulSet:
+            enabled: false
+          resources: {}
+          service:
+            enabled: true
+            servicePort: 9090
+            type: ClusterIP
           ingress:
             enabled: true
             hosts:
-              - prometheus.test.cloud
-            paths:
-              - /
+              - prometheus.minikube.cloud
+            path: /
+            pathType: Prefix
             annotations:
               kubernetes.io/ingress.class: nginx
-            labels: {}
+            extraLabels: {}
             tls: []
   destination:
     server: https://kubernetes.default.svc

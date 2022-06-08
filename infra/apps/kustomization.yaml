@@ -3,4 +3,5 @@ kind: Kustomization
 
 resources:
   - metrics-server
-  - fluentbit/application.yaml
+  - fluentbit
+  - prometheus
