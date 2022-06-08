@@ -10,5 +10,4 @@ metadata:
 spec:
   source:
     helm:
-      valueFiles:   # Value files expected to be available in the chart repo
-      - values-minikube.yaml
+      values: ""
