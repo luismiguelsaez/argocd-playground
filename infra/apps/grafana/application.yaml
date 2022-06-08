@@ -34,7 +34,7 @@ spec:
             interval: 1m
             scrapeTimeout: 30s
         datasources:
-          secretName: $(DS_SECRET)
+          secretName: $$(DS_SECRET)
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system
