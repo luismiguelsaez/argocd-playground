@@ -6,5 +6,6 @@ resources:
 
 secretGenerator:
 - name: grafana-datasources
+  namespace: monitoring
   files:
   - datasources.yaml
