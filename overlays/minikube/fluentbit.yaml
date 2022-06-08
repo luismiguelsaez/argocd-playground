@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fluentbit
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    name: fluentbit
+spec:
+  source:
+    helm:
+      valueFiles:   # Value files expected to be available in the chart repo
+      - values-minikube.yaml
