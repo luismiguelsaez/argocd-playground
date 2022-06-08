@@ -17,10 +17,10 @@ spec:
       values: |-
         serviceMonitor:
           enabled: true
-            namespace: monitoring
-            interval: 10s
-            scrapeTimeout: 10s
-            jobLabel: fluentbit
+          namespace: monitoring
+          interval: 10s
+          scrapeTimeout: 10s
+          jobLabel: fluentbit
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
