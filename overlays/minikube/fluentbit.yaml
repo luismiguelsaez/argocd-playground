@@ -16,10 +16,10 @@ spec:
           port: 2020
           labels: {}
           annotations:
-            prometheus.io/scrape: true
-            prometheus.io/scheme: http
-            prometheus.io/path: /metrics
-            prometheus.io/port: 2020
+            prometheus.io/scrape: "true"
+            prometheus.io/scheme: "http"
+            prometheus.io/path: "/api/v1/metrics/prometheus"
+            prometheus.io/port: "2020"
         serviceMonitor:
           enabled: false
           namespace: monitoring
