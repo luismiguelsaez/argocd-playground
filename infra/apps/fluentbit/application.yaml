@@ -14,8 +14,13 @@ spec:
     targetRevision: "0.20.1"
     chart: fluent-bit
     helm:
-      valueFiles:   # Value files expected to be available in the chart repo
-      - values.yaml
+      values: |-
+        serviceMonitor:
+          enabled: true
+            namespace: monitoring
+            interval: 10s
+            scrapeTimeout: 10s
+            jobLabel: fluentbit
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
