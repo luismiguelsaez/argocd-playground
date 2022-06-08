@@ -24,7 +24,7 @@ spec:
             kubernetes.io/ingress.class: nginx
           hostname: grafana.minikube.cloud
           path: /
-          tls:false
+          tls: false
         metrics:
           enabled: false
           serviceMonitor:
