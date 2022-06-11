@@ -11,10 +11,12 @@ spec:
   project: monitoring
   source:
     repoURL: https://github.com/prometheus-community/helm-charts
-    targetRevision: "15.9.1"
+    targetRevision: "kube-prometheus-stack-36.0.0"
     path: charts/kube-prometheus-stack/crds
     directory:
       recurse: true
+      exclude: "crd-prometheuses.yaml"
+      jsonnet: {}
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
