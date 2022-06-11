@@ -16,3 +16,7 @@
 - Github issues
   - https://github.com/argoproj/argo-cd/issues/2267
   - https://github.com/prometheus-community/helm-charts/issues/1500
+
+- Proposals and PRs
+  - https://github.com/argoproj/argo-cd/pull/8123
+  - https://github.com/argoproj/gitops-engine/pull/363
