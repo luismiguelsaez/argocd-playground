@@ -23,7 +23,7 @@ spec:
             pathType: Prefix
             ingressClassName: nginx
             extraLabels: {}
-            tls: []
+            tls: false
             extraHosts: []
             extraPaths: []
   destination:
