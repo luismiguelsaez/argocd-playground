@@ -8,7 +8,7 @@ metadata:
   labels:
     name: bluegreen
 spec:
-  project: monitoring
+  project: examples
   source:
     repoURL: https://luismiguelsaez/helm-charts
     targetRevision: main
