@@ -6,3 +6,4 @@ resources:
   - metrics-server
   - fluentbit
   - grafana
+  - argo-rollouts
