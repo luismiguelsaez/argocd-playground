@@ -18,6 +18,16 @@ spec:
       values: |-
         image:
           tag: 1.20.1-alpine
+        ingress:
+          enabled: true
+          className: nginx
+          annotations: {}
+          hosts:
+            - host: bluegreen.minikube.cloud
+              paths:
+                - path: /
+                  pathType: ImplementationSpecific
+          tls: []
   destination:
     server: https://kubernetes.default.svc
     namespace: examples
