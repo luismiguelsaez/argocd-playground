@@ -7,3 +7,4 @@ resources:
   - fluentbit
   - grafana
   - argo-rollouts
+  - argo-extensions
