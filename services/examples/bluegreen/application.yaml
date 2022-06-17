@@ -10,7 +10,7 @@ metadata:
 spec:
   project: examples
   source:
-    repoURL: https://luismiguelsaez/helm-charts
+    repoURL: https://github.com/luismiguelsaez/helm-charts
     targetRevision: main
     path: argocd-bluegreen
     directory: {}
