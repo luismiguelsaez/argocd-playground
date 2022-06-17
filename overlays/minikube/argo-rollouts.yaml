@@ -8,11 +8,8 @@ metadata:
   labels:
     name: argo-rollouts
 spec:
-  project: argocd
   source:
-    repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: "2.16.0"
-    chart: argo-rollouts
+    targetRevision: "2.17.0"
     helm:
       values: |-
         installCRDs: true
