@@ -12,7 +12,8 @@ spec:
   source:
     repoURL: https://luismiguelsaez/helm-charts
     targetRevision: main
-    chart: argocd-bluegreen
+    path: argocd-bluegreen
+    directory: {}
   destination:
     server: https://kubernetes.default.svc
     namespace: examples
