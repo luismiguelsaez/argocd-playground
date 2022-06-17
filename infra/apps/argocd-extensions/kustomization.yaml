@@ -1,10 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-# Install extensions controller
-resources:
-- https://github.com/argoproj-labs/argocd-extensions/manifests
-
 # Install extensions
-#components:
-#- https://raw.githubusercontent.com/argoproj-labs/rollout-extension/v0.2.0/manifests/install.yaml
+# Requires extensions controller to be enabled on ArgoCD bootstraping
+resources:
+- https://raw.githubusercontent.com/argoproj-labs/rollout-extension/v0.2.0/manifests/install.yaml
