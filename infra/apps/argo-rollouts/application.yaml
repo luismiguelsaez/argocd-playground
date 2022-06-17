@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: fluentbit
+  name: argo-rollouts
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   labels:
     name: argo-rollouts
 spec:
-  project: monitoring
+  project: argocd
   source:
     repoURL: https://argoproj.github.io/argo-helm
     targetRevision: "2.16.0"
@@ -32,7 +32,7 @@ spec:
           name: ""
   destination:
     server: https://kubernetes.default.svc
-    namespace: monitoring
+    namespace: argocd
   syncPolicy:
     automated:
       prune: true
