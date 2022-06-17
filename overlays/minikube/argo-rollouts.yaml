@@ -1,0 +1,57 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fluentbit
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    name: argo-rollouts
+spec:
+  source:
+    helm:
+      values: |-
+        installCRDs: true
+        keepCRDs: false
+        controller:
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
+          metrics:
+            enabled: true
+            serviceMonitor:
+              enabled: true
+              additionalLabels: {}
+              additionalAnnotations: {}
+        dashboard:
+          enabled: true
+          service:
+            type: ClusterIP
+            loadBalancerIP: ""
+            loadBalancerSourceRanges: []
+          ingress:
+            enabled: true
+            annotations: {}
+            labels: {}
+            ingressClassName: nginx
+            hosts:
+            - argo-rollouts.minikube.cloud
+            paths:
+            - /
+            pathType: Prefix
+            extraPaths: []
+            tls: []
+          notifications:
+            secret:
+              create: true
+              items:
+                slack-token: ""
+            notifiers:
+              service.slack:
+                token: $slack-token
+            templates: {}
+            triggers: {}

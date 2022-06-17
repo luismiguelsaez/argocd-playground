@@ -1,4 +1,9 @@
 
+## Argo Rollouts
+
+- Docs
+  - https://argoproj.github.io/argo-rollouts
+
 ## Issues
 
 ### Error while applying Prometheus stack CRDS

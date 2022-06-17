@@ -7,3 +7,4 @@ patchesStrategicMerge:
 - metrics-server.yaml
 - fluentbit.yaml
 - grafana.yaml
+- argo-rollouts.yaml
