@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bluegreen
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    name: bluegreen
+spec:
+  project: examples
+  source:
+    repoURL: https://github.com/luismiguelsaez/helm-charts
+    targetRevision: main
+    path: argocd-bluegreen
+    helm:
+      values: |-
+        image:
+          tag: nginx:1.21-alpine
+        ingress:
+          enabled: true
+          className: nginx
+          annotations: {}
+          hosts:
+            - host: bluegreen.minikube.cloud
+              paths:
+                - path: /
+                  pathType: ImplementationSpecific
+          tls: []

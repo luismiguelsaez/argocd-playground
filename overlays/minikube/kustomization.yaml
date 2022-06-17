@@ -8,3 +8,4 @@ patchesStrategicMerge:
 - fluentbit.yaml
 - grafana.yaml
 - argo-rollouts.yaml
+- bluegreen-values.yaml
