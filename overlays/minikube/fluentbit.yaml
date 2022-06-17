@@ -21,7 +21,7 @@ spec:
             prometheus.io/path: "/api/v1/metrics/prometheus"
             prometheus.io/port: "2020"
         serviceMonitor:
-          enabled: false
+          enabled: true
           namespace: monitoring
           interval: 15s
           scrapeTimeout: 10s
