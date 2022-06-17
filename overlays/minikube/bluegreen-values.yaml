@@ -16,7 +16,7 @@ spec:
     helm:
       values: |-
         image:
-          tag: nginx:1.21-alpine
+          tag: 1.21-alpine
         ingress:
           enabled: true
           className: nginx
