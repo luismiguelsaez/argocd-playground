@@ -13,7 +13,6 @@ spec:
     repoURL: https://github.com/luismiguelsaez/helm-charts
     targetRevision: main
     path: argocd-bluegreen
-    directory: {}
     helm:
       values: |-
         image:
