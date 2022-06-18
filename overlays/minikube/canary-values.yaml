@@ -16,7 +16,7 @@ spec:
           tag: 1.21-alpine
         ingress:
           stable:
-            enabled: true
+            enabled: false
             className: nginx
             annotations: {}
             hosts:
@@ -26,7 +26,7 @@ spec:
                     pathType: ImplementationSpecific
             tls: []
           canary:
-            enabled: true
+            enabled: false
             className: ""
             annotations: {}
             hosts:
