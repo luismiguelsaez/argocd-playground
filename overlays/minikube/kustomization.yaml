@@ -9,3 +9,4 @@ patchesStrategicMerge:
 - grafana.yaml
 - argo-rollouts.yaml
 - bluegreen-values.yaml
+- canary-values.yaml
