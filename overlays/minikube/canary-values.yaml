@@ -12,6 +12,8 @@ spec:
     targetRevision: main
     helm:
       values: |-
+        image:
+          tag: 1.21-alpine
         ingress:
           stable:
             enabled: true
