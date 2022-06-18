@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: bluegreen
+  name: canary
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   labels:
-    name: bluegreen
+    name: canary
 spec:
   project: examples
   source:
     repoURL: https://github.com/luismiguelsaez/helm-charts
     targetRevision: main
-    path: argocd-bluegreen
+    path: argocd-canary
     helm:
       values: ""
   destination:

@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: canary
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    name: canary
+spec:
+  source:
+    targetRevision: main
+    helm:
+      values: |-
+        ingress:
+          stable:
+            enabled: true
+            className: nginx
+            annotations: {}
+            hosts:
+              - host: canary-stable.minikube.cloud
+                paths:
+                  - path: /
+                    pathType: ImplementationSpecific
+            tls: []
+          canary:
+            enabled: true
+            className: ""
+            annotations: {}
+            hosts:
+              - host: canary-test.minikube.cloud
+                paths:
+                  - path: /
+                    pathType: ImplementationSpecific
+            tls: []
