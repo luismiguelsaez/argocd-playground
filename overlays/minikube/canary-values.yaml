@@ -12,6 +12,7 @@ spec:
     targetRevision: main
     helm:
       values: |-
+        replicaCount: 6
         image:
           tag: 1.21-alpine
         ingress:
