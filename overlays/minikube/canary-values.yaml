@@ -16,23 +16,10 @@ spec:
         image:
           tag: 1.21-alpine
         ingress:
-          stable:
-            enabled: false
-            className: nginx
-            annotations: {}
-            hosts:
-              - host: canary-stable.minikube.cloud
-                paths:
-                  - path: /
-                    pathType: ImplementationSpecific
-            tls: []
-          canary:
-            enabled: false
-            className: ""
-            annotations: {}
-            hosts:
-              - host: canary-test.minikube.cloud
-                paths:
-                  - path: /
-                    pathType: ImplementationSpecific
-            tls: []
+          enabled: true
+          annotations: {}
+            kubernetes.io/ingress.class: nginx
+          hosts:
+            - host: canary.minikube.cloud
+              paths: []
+          tls: []
