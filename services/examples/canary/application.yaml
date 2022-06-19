@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://github.com/luismiguelsaez/helm-charts
     targetRevision: main
-    path: argocd-canary
+    path: nginx
     helm:
       values: ""
   destination:
