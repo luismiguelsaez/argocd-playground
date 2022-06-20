@@ -25,3 +25,22 @@ spec:
                 - path: /
                   pathType: ImplementationSpecific
           tls: []
+        rollout:
+          trafficManagement:
+            enabled: false
+            type: nginx
+          steps:
+            - setWeight: 15
+            - pause:
+                duration: 1m
+            - setWeight: 25
+            - pause:
+                duration: 1m
+            - setWeight: 50
+            - pause:
+                duration: 1m
+            - setWeight: 75
+            - pause:
+                duration: 1m
+            - setWeight: 100
+            - pause: {}
