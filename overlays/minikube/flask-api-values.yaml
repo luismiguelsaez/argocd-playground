@@ -38,7 +38,7 @@ spec:
             templates:
             - templateName: success-rate
             prometheus:
-              address: http://prometheus-kube-prometheus-prometheus.monitoring:9090
+              address: http://prometheus-stack-kube-prom-prometheus.monitoring:9090
           trafficManagement:
             enabled: true
             type: nginx
