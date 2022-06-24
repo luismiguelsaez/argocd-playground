@@ -1,0 +1,26 @@
+      values:
+        image:
+          tag: v2-success
+        ingress:
+          enabled: true
+          className: nginx
+          annotations: {}
+          hosts:
+            - host: api.minikube.local
+              paths:
+                - path: /
+                  pathType: Prefix
+          tls: []
+        serviceMonitor:
+          enabled: true
+          interval: 15s
+          scrapeTimeout: 14s
+          namespace: monitoring
+        argoRollout:
+          enabled: true
+          trafficManagement:
+            enabled: true
+            type: nginx
+          steps:
+            - setWeight: 5
+            - pause: {}
