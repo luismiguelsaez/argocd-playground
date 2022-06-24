@@ -5,3 +5,4 @@ resources:
   - projects
   - examples/bluegreen
   - examples/canary
+  - examples/flask-api
