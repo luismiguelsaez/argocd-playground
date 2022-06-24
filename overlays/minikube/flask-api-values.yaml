@@ -32,6 +32,10 @@ spec:
           namespace: monitoring
         argoRollout:
           enabled: true
+          analysis:
+            enabled: true
+            templates:
+            - templateName: success-rate 
           trafficManagement:
             enabled: true
             type: nginx
