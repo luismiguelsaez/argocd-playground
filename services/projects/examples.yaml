@@ -13,7 +13,8 @@ spec:
   destinations:
   - namespace: examples
     server: https://kubernetes.default.svc
-
+  - namespace: monitoring
+    server: https://kubernetes.default.svc
   namespaceResourceWhitelist:
   - group: '*'
     kind: '*'
