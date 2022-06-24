@@ -11,3 +11,4 @@ patchesStrategicMerge:
 - bluegreen-values.yaml
 - canary-values.yaml
 - prometheus-stack.yaml
+- flask-api-values.yaml
