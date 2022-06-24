@@ -9,10 +9,8 @@ metadata:
     name: flask-api
 spec:
   source:
-    repoURL: https://github.com/luismiguelsaez/helm-charts
-    targetRevision: main
     helm:
-      values:
+      values: |-
         image:
           tag: v2-success
         ingress:
