@@ -23,16 +23,16 @@ spec:
             scrapeTimeout: 14s
         selfMonitor: true
         prometheus:
+          prometheusSpec:
+            scrapeInterval: 15s
+            scrapeTimeout: 14s
+            serviceMonitorSelector: {}
+            serviceMonitorNamespaceSelector: {}
+            podMonitorSelector: {}
+            podMonitorNamespaceSelector: {}
+            serviceMonitorSelectorNilUsesHelmValues: false
           ingress:
             enabled: true
-            prometheusSpec:
-              scrapeInterval: 15s
-              scrapeTimeout: 14s
-              serviceMonitorSelector: {}
-              serviceMonitorNamespaceSelector: {}
-              podMonitorSelector: {}
-              podMonitorNamespaceSelector: {}
-              serviceMonitorSelectorNilUsesHelmValues: false
             ingressClassName: nginx
             annotations: {}
             labels: {}
