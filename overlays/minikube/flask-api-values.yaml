@@ -57,7 +57,7 @@ spec:
                 - templateName: success-rate
                 args:
                   - name: query-service-name
-                    value: flask-api-canary"
+                    value: flask-api-canary
                   - name: query-interval
                     value: 5m
                   - name: prometheus-address
