@@ -41,4 +41,4 @@
   klf -n argocd -l app.kubernetes.io/component=rollouts-controller
   ```
 
-- Check metrics in [prometheus](http://prometheus.minikube.cloud/graph?g0.expr=(%20sum(irate(api_requests_latency_by_status_sum%7Bservice%3D%22flask-api-canary%22%2Cstatus%3D%22200%22%7D%5B5m%5D))%20%2F%20sum(irate(api_requests_latency_by_status_sum%7Bservice%3D%22flask-api-canary%22%7D%5B5m%5D))%20)&g0.tab=1&g0.stacked=0&g0.show_exemplars=0&g0.range_input=1h)
+- Check metrics in [prometheus](http://prometheus.minikube.cloud/graph?g0.expr=(%20sum(irate(api_requests_latency_by_status_sum%7Bservice%3D%22flask-api-canary%22%2Cstatus%3D%22200%22%7D%5B5m%5D))%20%2F%20sum(irate(api_requests_latency_by_status_sum%7Bservice%3D%22flask-api-canary%22%7D%5B5m%5D))%20)%20*%20100&g0.tab=1&g0.stacked=0&g0.show_exemplars=0&g0.range_input=1h)
