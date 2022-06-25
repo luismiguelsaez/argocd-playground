@@ -12,7 +12,7 @@ spec:
     helm:
       values: |-
         image:
-          tag: v2-success
+          tag: v2
         ingress:
           enabled: true
           className: nginx
@@ -41,12 +41,12 @@ spec:
             - templateName: success-rate
             prometheus:
               address: http://prometheus-stack-kube-prom-prometheus.monitoring:9090
-            successRate: 50
+            successRate: "50"
             query:
               interval: 1m
             metrics: 
               interval: 1m
-              failureLimit: 5
+              failureLimit: "5"
           trafficManagement:
             enabled: true
             type: nginx
