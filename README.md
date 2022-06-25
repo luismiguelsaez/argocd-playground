@@ -30,8 +30,9 @@
 ## Argo canary test
 
 - Modify image version in `overlays/minikube/flask-api-values`. Two images available
-  - `flask-api:v2-success` - 95% of HTTP 200 response
-  - `flask-api:v2-fail` - 5% of HTTP 200 response and 95% of HTTP 500 response
+  - `flask-api:v2` - 100% of HTTP 200 responses
+  - `flask-api:v2-success` - 95% of HTTP 200 responses
+  - `flask-api:v2-fail` - 5% of HTTP 200 responses and 95% of HTTP 500 responses
 
 - Check rollout status in [rollouts UI](http://argo-rollouts.minikube.cloud/rollout/flask-api)
 
