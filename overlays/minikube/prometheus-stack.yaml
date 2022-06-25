@@ -24,6 +24,7 @@ spec:
         selfMonitor: true
         prometheus:
           prometheusSpec:
+            logLevel: debug
             scrapeInterval: 15s
             scrapeTimeout: 14s
             serviceMonitorSelector: {}
