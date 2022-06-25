@@ -28,6 +28,7 @@ spec:
               enabled: true
               additionalLabels: {}
               additionalAnnotations: {}
+        notifications: {}
         dashboard:
           enabled: true
           service:
