@@ -41,7 +41,9 @@
   klf -n argocd -l app.kubernetes.io/component=rollouts-controller
   ```
   ```
-  time="2022-06-25T16:11:12Z" level=info msg="Event(v1.ObjectReference{Kind:\"Rollout\", Namespace:\"examples\", Name:\"flask-api\", UID:\"72458bd4-7f6c-4027-bb59-6b5c00633b80\", APIVersion:\"argoproj.io/v1alpha1\", ResourceVersion:\"7404\", FieldPath:\"\"}): type: 'Warning' reason: 'RolloutAborted' Rollout aborted update to revision 6: Metric \"success-rate\" assessed Error due to consecutiveErrors (5) > consecutiveErrorLimit (4): \"Error Message: invalid operation: >= (mismatched types float64 and string)\""
+  time="2022-06-25T17:53:36Z" level=info msg="Running overdue measurement" analysisrun=flask-api-cb57d55dd-10-1 metric=success-rate namespace=examples
+  time="2022-06-25T17:53:36Z" level=info msg="Measurement Completed. Result: Successful" analysisrun=flask-api-cb57d55dd-10-1 metric=success-rate namespace=examples
+  time="2022-06-25T17:53:36Z" level=info msg="Metric Assessment Result - Successful: Count (5) Reached" metric=success-rate
   ```
   ```
   time="2022-06-25T16:37:09Z" level=info msg="Running overdue measurement" analysisrun=flask-api-cb57d55dd-8 metric=success-rate namespace=examples
