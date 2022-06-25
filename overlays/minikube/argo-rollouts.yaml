@@ -28,7 +28,12 @@ spec:
               enabled: true
               additionalLabels: {}
               additionalAnnotations: {}
-        notifications: {}
+        notifications:
+          secret:
+            create: false
+            items: {}
+          notifiers: {}
+          templates: {}
         dashboard:
           enabled: true
           service:
