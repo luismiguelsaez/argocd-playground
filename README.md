@@ -29,7 +29,7 @@
 
 ## Argo canary test
 
-- Modify image version in `overlays/minikube/flask-api-values`. Two images available
+- Modify image version in `overlays/minikube/flask-api-values`. Three images available
   - `flask-api:v2` - 100% of HTTP 200 responses
   - `flask-api:v2-success` - 95% of HTTP 200 responses
   - `flask-api:v2-fail` - 5% of HTTP 200 responses and 95% of HTTP 500 responses
