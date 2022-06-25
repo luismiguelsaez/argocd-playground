@@ -12,7 +12,7 @@ spec:
     helm:
       values: |-
         image:
-          tag: v2-success
+          tag: v2
         ingress:
           enabled: true
           className: nginx
@@ -35,7 +35,7 @@ spec:
           tester:
             enabled: true
           analysis:
-            enabled: true
+            enabled: false
             startingStep: 2
             templates:
             - templateName: success-rate
@@ -54,6 +54,22 @@ spec:
             - setWeight: 25
             - pause:
                 duration: 5m
+            - analysis:
+              templates:
+              - templateName: success-rate
+              args:
+                - name: query-service-name
+                  value: flask-api-canary"
+                - name: query-interval
+                  value: 5m
+                - name: prometheus-address
+                  value: http://prometheus-stack-kube-prom-prometheus.monitoring:9090
+                - name: metrics-interval
+                  value: 1m
+                - name: metrics-failure-limit
+                  value: "5"
+                - name: success-rate
+                  value: "85"
             - setWeight: 50
             - pause:
                 duration: 5m
