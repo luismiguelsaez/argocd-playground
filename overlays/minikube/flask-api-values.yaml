@@ -66,8 +66,10 @@ spec:
                     value: http://prometheus-stack-kube-prom-prometheus.monitoring:9090
                   - name: metrics-interval
                     value: 1m
-                  - name: metrics-failure-limit
+                  - name: metrics-count
                     value: "5"
+                  - name: metrics-failure-limit
+                    value: "3"
                   - name: success-rate
                     value: "85"
             - setWeight: 50
