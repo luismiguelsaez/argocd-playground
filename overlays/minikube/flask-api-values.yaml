@@ -32,6 +32,8 @@ spec:
           namespace: monitoring
         argoRollout:
           enabled: true
+          tester:
+            enabled: true
           analysis:
             enabled: true
             startingStep: 2
@@ -63,4 +65,5 @@ spec:
             enabled: true
             telegram:
               enabled: true
-              token: "5447243734:AAEZaGmUdTUT28cSXRFsFy0uCrv4-0Jxai8"
+              user: ""
+              token: ""
