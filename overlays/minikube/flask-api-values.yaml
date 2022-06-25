@@ -12,7 +12,7 @@ spec:
     helm:
       values: |-
         image:
-          tag: v2-fail
+          tag: v2
         ingress:
           enabled: true
           className: nginx
