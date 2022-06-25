@@ -12,7 +12,7 @@ spec:
     helm:
       values: |-
         image:
-          tag: v2
+          tag: v2-success
         ingress:
           enabled: true
           className: nginx
@@ -43,7 +43,7 @@ spec:
               address: http://prometheus-stack-kube-prom-prometheus.monitoring:9090
             successRate: 50
             query:
-              interval: 5m
+              interval: 1m
             metrics: 
               interval: 1m
               failureLimit: 5
