@@ -59,3 +59,8 @@ spec:
             - pause:
                 duration: 5m
             - setWeight: 100
+          notifications:
+            enabled: true
+            telegram:
+              enabled: true
+              token: "5447243734:AAEZaGmUdTUT28cSXRFsFy0uCrv4-0Jxai8"
