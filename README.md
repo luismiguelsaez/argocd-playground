@@ -25,3 +25,19 @@
 - Proposals and PRs
   - https://github.com/argoproj/argo-cd/pull/8123
   - https://github.com/argoproj/gitops-engine/pull/363
+
+
+## Argo canary test
+
+- Modify image version in `overlays/minikube/flask-api-values`. Two images available
+  - `flask-api:v2-success` - 95% of HTTP 200 response
+  - `flask-api:v2-fail` - 5% of HTTP 200 response and 95% of HTTP 500 response
+
+- Check rollout status in [rollouts UI](http://argo-rollouts.minikube.cloud/rollout/flask-api)
+
+- Status can be seen in `rollouts controller` pods as well
+  ```bash
+  klf -n argocd -l app.kubernetes.io/component=rollouts-controller
+  ```
+
+- Check metrics in [prometheus](http://prometheus.minikube.cloud/graph?g0.expr=(%20sum(irate(api_requests_latency_by_status_sum%7Bservice%3D%22flask-api-canary%22%2Cstatus%3D%22200%22%7D%5B5m%5D))%20%2F%20sum(irate(api_requests_latency_by_status_sum%7Bservice%3D%22flask-api-canary%22%7D%5B5m%5D))%20)&g0.tab=1&g0.stacked=0&g0.show_exemplars=0&g0.range_input=1h)
