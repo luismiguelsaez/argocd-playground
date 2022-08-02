@@ -10,4 +10,6 @@ metadata:
 spec:
   source:
     helm:
-      values: ""
+      values: |-
+        nameOverride: "metrics-server"
+        fullnameOverride: "metrics-server"

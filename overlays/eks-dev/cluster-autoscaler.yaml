@@ -11,6 +11,7 @@ spec:
   source:
     helm:
       values: |-
+        nameOverride: "cluster-autoscaler"
         cloudProvider: aws
         dnsPolicy: Default
         autoDiscovery:
