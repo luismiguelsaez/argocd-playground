@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-ingress
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    name: nginx-ingress
+spec:
+  source:
+    helm:
+      values: |-
+        controller:
+          logLevel: 1
+          nodeSelector: {}
+          kind: daemonset
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          service:
+            create: true
+            type: LoadBalancer
+            annotations:
+              service.beta.kubernetes.io/aws-load-balancer-type: external
+              service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+              service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: instance
+              service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
