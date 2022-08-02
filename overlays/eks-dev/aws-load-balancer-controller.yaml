@@ -8,7 +8,6 @@ metadata:
   labels:
     name: aws-load-balancer-controller
 spec:
-  project: system
   source:
     helm:
       values: |-
