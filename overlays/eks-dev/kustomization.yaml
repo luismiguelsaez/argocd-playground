@@ -5,7 +5,9 @@ bases:
 - ../../infra/apps/aws-load-balancer-controller
 - ../../infra/apps/external-dns
 - ../../infra/apps/cluster-autoscaler
+- ../../infra/apps/metrics-server
 patchesStrategicMerge:
 - aws-load-balancer-controller.yaml
 - external-dns.yaml
 - cluster-autoscaler.yaml
+- metrics-server.yaml
