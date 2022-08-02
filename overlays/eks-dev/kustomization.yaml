@@ -1,7 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 bases:
-- ../../infra/projects/system
+- ../../infra/projects/system.yaml
 - ../../infra/apps/aws-load-balancer-controller
 patchesStrategicMerge:
 - aws-load-balancer-controller.yaml
