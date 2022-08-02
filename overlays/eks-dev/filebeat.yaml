@@ -43,7 +43,7 @@ spec:
                 ssl:
                   enabled: true
               output.console:
-                enabled: false
+                enabled: true
                 pretty: true
               logging:
                 level: warning
