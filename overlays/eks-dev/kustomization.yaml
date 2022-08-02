@@ -8,3 +8,4 @@ bases:
 patchesStrategicMerge:
 - aws-load-balancer-controller.yaml
 - external-dns.yaml
+- cluster-autoscaler.yaml
