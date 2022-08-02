@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-autoscaler
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    name: cluster-autoscaler
+spec:
+  project: system
+  source:
+    repoURL: https://kubernetes.github.io/autoscaler
+    targetRevision: "9.19.2"
+    chart: cluster-autoscaler
+    helm:
+      values: |-
+        autoDiscovery:
+          clusterName: "k8s-test"
+          tags:
+            - k8s.io/cluster-autoscaler/enabled
+            - k8s.io/cluster-autoscaler/{{ .Values.autoDiscovery.clusterName }}
+          roles:
+            - worker
+        rbac:
+          serviceAccount:
+            annotations:
+              eks.amazonaws.com/role-arn: arn:aws:iam::484308071187:role/cluster-autoscaler@kube-system
+            create: true
+            name: cluster-autoscaler
+            automountServiceAccountToken: true
+        awsRegion: eu-central-1
+        extraArgs:
+          logtostderr: true
+          stderrthreshold: info
+        resources:
+          limits:
+            cpu: 100m
+            memory: 300Mi
+          requests:
+            cpu: 100m
+            memory: 300Mi

@@ -4,6 +4,7 @@ bases:
 - ../../infra/projects
 - ../../infra/apps/aws-load-balancer-controller
 - ../../infra/apps/external-dns
+- ../../infra/apps/cluster-autoscaler
 patchesStrategicMerge:
 - aws-load-balancer-controller.yaml
 - external-dns.yaml
