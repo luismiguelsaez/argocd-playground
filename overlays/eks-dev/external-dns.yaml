@@ -8,11 +8,6 @@ metadata:
   labels:
     name: external-dns
 spec:
-  project: system
-  source:
-    repoURL: https://kubernetes-sigs.github.io/external-dns/
-    targetRevision: "1.10.1"
-    chart: external-dns
     helm:
       values: |-
         serviceAccount:
