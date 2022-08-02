@@ -3,5 +3,7 @@ kind: Kustomization
 bases:
 - ../../infra/projects
 - ../../infra/apps/aws-load-balancer-controller
+- ../../infra/apps/external-dns
 patchesStrategicMerge:
 - aws-load-balancer-controller.yaml
+- external-dns.yaml

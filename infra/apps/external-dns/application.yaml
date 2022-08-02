@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: aws-load-balancer-controller
+  name: external-dns
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   labels:
-    name: aws-load-balancer-controller
+    name: external-dns
 spec:
   project: system
   source:
-    repoURL: https://aws.github.io/eks-charts
-    targetRevision: "1.4.3"
-    chart: aws-load-balancer-controller
+    repoURL: https://kubernetes-sigs.github.io/external-dns/
+    targetRevision: "1.10.1"
+    chart: external-dns
     helm:
       values: ""
   destination:

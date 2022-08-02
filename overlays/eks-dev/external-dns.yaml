@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external-dns
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    name: external-dns
+spec:
+  project: system
+  source:
+    repoURL: https://kubernetes-sigs.github.io/external-dns/
+    targetRevision: "1.10.1"
+    chart: external-dns
+    helm:
+      values: |-
+        serviceAccount:
+          create: true
+          annotations:
+            eks.amazonaws.com/role-arn: arn:aws:iam::484308071187:role/external-dns@kube-system
+          name: external-dns
+        logLevel: info
+        logFormat: json
