@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: aws-load-balancer-controller
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    name: aws-load-balancer-controller
+spec:
+  project: system
+  source:
+    helm:
+      values: |-
+        clusterName: k8s-test
+        serviceAccount:
+          create: true
+          annotations:
+            eks.amazonaws.com/role-arn: arn:aws:iam::484308071187:role/aws-load-balancer-controller@kube-system
+          name: aws-load-balancer-controller
+        region: eu-central-1
