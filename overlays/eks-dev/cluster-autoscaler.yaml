@@ -11,6 +11,7 @@ spec:
     helm:
       values: |-
         cloudProvider: aws
+        dnsPolicy: Default
         autoDiscovery:
           clusterName: "k8s-test"
           tags:
@@ -19,11 +20,12 @@ spec:
           roles:
             - worker
         rbac:
+          create: true
           serviceAccount:
-            annotations:
-              eks.amazonaws.com/role-arn: arn:aws:iam::484308071187:role/cluster-autoscaler@kube-system
             create: true
             name: cluster-autoscaler
+            annotations:
+              eks.amazonaws.com/role-arn: arn:aws:iam::484308071187:role/cluster-autoscaler@kube-system
             automountServiceAccountToken: true
         awsRegion: eu-central-1
         extraArgs:
