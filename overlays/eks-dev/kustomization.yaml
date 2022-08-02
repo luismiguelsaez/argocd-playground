@@ -6,8 +6,10 @@ bases:
 - ../../infra/apps/external-dns
 - ../../infra/apps/cluster-autoscaler
 - ../../infra/apps/metrics-server
+- ../../infra/apps/filebeat
 patchesStrategicMerge:
 - aws-load-balancer-controller.yaml
 - external-dns.yaml
 - cluster-autoscaler.yaml
 - metrics-server.yaml
+- filebeat.yaml
