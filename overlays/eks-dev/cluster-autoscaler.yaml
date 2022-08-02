@@ -10,6 +10,7 @@ metadata:
 spec:
     helm:
       values: |-
+        cloudProvider: aws
         autoDiscovery:
           clusterName: "k8s-test"
           tags:
