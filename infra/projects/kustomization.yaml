@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - system.yaml
   - monitoring.yaml
+  - ingress.yaml
