@@ -1,0 +1,92 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus-stack
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    name: prometheus-stack
+spec:
+  source:
+    targetRevision: "39.4.0"
+    helm:
+      values: |-
+        fullnameOverride: kube-prom
+        prometheusOperator:
+          logLevel: info
+          serviceMonitor:
+            interval: 15s
+            scrapeTimeout: 14s
+        selfMonitor: true
+        prometheus:
+          prometheusSpec:
+            logLevel: debug
+            scrapeInterval: 15s
+            scrapeTimeout: 14s
+            serviceMonitorSelector: {}
+            serviceMonitorNamespaceSelector: {}
+            podMonitorSelector: {}
+            podMonitorNamespaceSelector: {}
+            serviceMonitorSelectorNilUsesHelmValues: false
+          service:
+            type: NodePort
+          ingress:
+            enabled: true
+            ingressClassName: alb
+            annotations:
+              alb.ingress.kubernetes.io/scheme: internet-facing
+              alb.ingress.kubernetes.io/inbound-cidrs: 0.0.0.0/0
+              alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-central-1:484308071187:certificate/aca221b6-0f15-4d58-b1f3-fd27fc14c67a
+              alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS-1-2-2017-01
+              alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80},{"HTTPS": 443}]'
+              alb.ingress.kubernetes.io/ssl-redirect: '443'
+              alb.ingress.kubernetes.io/success-codes: '302'
+            labels: {}
+            hosts:
+              - prometheus.minikube.cloud
+            pathType: Prefix
+            paths:
+              - /
+            tls: []
+        alertmanager:
+          alertmanagerSpec:
+            logLevel: info
+          service:
+            type: NodePort
+          ingress:
+            enabled: true
+            ingressClassName: alb
+            annotations:
+              alb.ingress.kubernetes.io/scheme: internet-facing
+              alb.ingress.kubernetes.io/inbound-cidrs: 0.0.0.0/0
+              alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-central-1:484308071187:certificate/aca221b6-0f15-4d58-b1f3-fd27fc14c67a
+              alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS-1-2-2017-01
+              alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80},{"HTTPS": 443}]'
+              alb.ingress.kubernetes.io/ssl-redirect: '443'
+            labels: {}
+            hosts:
+              - alertmanager.minikube.cloud
+            pathType: Prefix
+            paths:
+              - /
+            tls: []
+        grafana:
+          service:
+            type: NodePort
+          ingress:
+            enabled: true
+            ingressClassName: alb
+            annotations:
+              alb.ingress.kubernetes.io/scheme: internet-facing
+              alb.ingress.kubernetes.io/inbound-cidrs: 0.0.0.0/0
+              alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-central-1:484308071187:certificate/aca221b6-0f15-4d58-b1f3-fd27fc14c67a
+              alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS-1-2-2017-01
+              alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80},{"HTTPS": 443}]'
+              alb.ingress.kubernetes.io/ssl-redirect: '443'
+              alb.ingress.kubernetes.io/success-codes: '302'
+            labels: {}
+            hosts:
+              - grafana.minikube.cloud
+            path: /
+            tls: []

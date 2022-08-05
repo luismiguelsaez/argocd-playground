@@ -1,38 +1,28 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus
+  name: prometheus-stack-crds
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
   labels:
-    name: prometheus
+    name: prometheus-stack-crds
 spec:
   project: monitoring
   source:
-    repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: "8.0.6"
-    chart: kube-prometheus
-    helm:
-      skipCrds: false
-      values: |
-        prometheus:
-          ingress:
-            enabled: true
-            hostname: prometheus.minikube.cloud
-            path: /
-            pathType: Prefix
-            ingressClassName: nginx
-            extraLabels: {}
-            tls: false
-            extraHosts: []
-            extraPaths: []
+    repoURL: https://github.com/prometheus-community/helm-charts.git
+    path: charts/kube-prometheus-stack/crds/
+    targetRevision: kube-prometheus-stack-39.4.0
+    directory:
+      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
   syncPolicy:
     automated:
-      prune: false
+      prune: true
       selfHeal: true
       allowEmpty: false
     syncOptions:

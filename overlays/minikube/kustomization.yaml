@@ -10,5 +10,5 @@ patchesStrategicMerge:
 - argo-rollouts.yaml
 - bluegreen-values.yaml
 - canary-values.yaml
-- prometheus-stack.yaml
+- kube-prometheus-stack.yaml
 - flask-api-values.yaml
