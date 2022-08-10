@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    name: vault
+spec:
+  project: security
+  source:
+    repoURL: https://helm.releases.hashicorp.com
+    targetRevision: "0.20.1"
+    chart: vault
+    helm:
+      values: |
+        injector:
+          enabled: false
+        server:
+          enabled: true
+          logLevel: info
+          logFormat: json
+          resources:
+            requests:
+              memory: 128Mi
+              cpu: 100m
+            limits:
+              memory: 128i
+              cpu: 100m
+          ingress:
+            enabled: true
+            labels: {}
+            annotations:
+              nginx.ingress.kubernetes.io/ssl-redirect: "false"
+            ingressClassName: nginx
+            pathType: Prefix
+            activeService: true
+            hosts:
+              - host: vault.minikube.cloud
+                paths: /
+            extraPaths: []
+            tls: []
+          postStart: []
