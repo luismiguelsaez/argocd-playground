@@ -25,6 +25,8 @@ spec:
           enabled: true
           logLevel: info
           logFormat: json
+          standalone:
+            enabled: true
           dev:
             enabled: true
           resources:
