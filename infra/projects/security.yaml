@@ -6,7 +6,7 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  description: Project containing infrastructure monitoring services
+  description: Project containing infrastructure security services
 
   sourceRepos:
   - '*'
