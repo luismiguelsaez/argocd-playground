@@ -30,18 +30,12 @@ spec:
             podMonitorNamespaceSelector: {}
             serviceMonitorSelectorNilUsesHelmValues: false
           service:
-            type: NodePort
+            type: ClusterIP
           ingress:
             enabled: true
-            ingressClassName: alb
+            ingressClassName: nginx
             annotations:
-              alb.ingress.kubernetes.io/scheme: internet-facing
-              alb.ingress.kubernetes.io/inbound-cidrs: 0.0.0.0/0
-              alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-central-1:484308071187:certificate/aca221b6-0f15-4d58-b1f3-fd27fc14c67a
-              alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS-1-2-2017-01
-              alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80},{"HTTPS": 443}]'
-              alb.ingress.kubernetes.io/ssl-redirect: '443'
-              alb.ingress.kubernetes.io/success-codes: '302'
+              nginx.ingress.kubernetes.io/ssl-redirect: "false"
             labels: {}
             hosts:
               - prometheus.minikube.cloud
@@ -53,17 +47,12 @@ spec:
           alertmanagerSpec:
             logLevel: info
           service:
-            type: NodePort
+            type: ClusterIP
           ingress:
             enabled: true
-            ingressClassName: alb
+            ingressClassName: nginx
             annotations:
-              alb.ingress.kubernetes.io/scheme: internet-facing
-              alb.ingress.kubernetes.io/inbound-cidrs: 0.0.0.0/0
-              alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-central-1:484308071187:certificate/aca221b6-0f15-4d58-b1f3-fd27fc14c67a
-              alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS-1-2-2017-01
-              alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80},{"HTTPS": 443}]'
-              alb.ingress.kubernetes.io/ssl-redirect: '443'
+              nginx.ingress.kubernetes.io/ssl-redirect: "false"
             labels: {}
             hosts:
               - alertmanager.minikube.cloud
@@ -73,18 +62,12 @@ spec:
             tls: []
         grafana:
           service:
-            type: NodePort
+            type: ClusterIP
           ingress:
             enabled: true
-            ingressClassName: alb
+            ingressClassName: nginx
             annotations:
-              alb.ingress.kubernetes.io/scheme: internet-facing
-              alb.ingress.kubernetes.io/inbound-cidrs: 0.0.0.0/0
-              alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-central-1:484308071187:certificate/aca221b6-0f15-4d58-b1f3-fd27fc14c67a
-              alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS-1-2-2017-01
-              alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80},{"HTTPS": 443}]'
-              alb.ingress.kubernetes.io/ssl-redirect: '443'
-              alb.ingress.kubernetes.io/success-codes: '302'
+              nginx.ingress.kubernetes.io/ssl-redirect: "false"
             labels: {}
             hosts:
               - grafana.minikube.cloud
