@@ -38,7 +38,8 @@ spec:
             activeService: true
             hosts:
               - host: vault.minikube.cloud
-                paths: /
+                paths:
+                  - /
             extraPaths: []
             tls: []
           postStart: []
