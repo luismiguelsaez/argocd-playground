@@ -17,10 +17,16 @@ spec:
       values: |
         injector:
           enabled: false
+        ha:
+          enabled: false
+        ui:
+          enabled: true
         server:
           enabled: true
           logLevel: info
           logFormat: json
+          dev:
+            enabled: true
           resources:
             requests:
               memory: 128Mi
