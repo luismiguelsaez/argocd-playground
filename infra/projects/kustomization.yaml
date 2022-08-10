@@ -5,3 +5,4 @@ resources:
   - system.yaml
   - monitoring.yaml
   - ingress.yaml
+  - security.yaml
