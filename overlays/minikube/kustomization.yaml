@@ -6,12 +6,13 @@ bases:
 #- ../../infra/apps/vault
 - ../../infra/apps/kube-prometheus-stack-crds
 - ../../infra/apps/kube-prometheus-stack
+- ../../infra/apps/argo-rollouts
 patchesStrategicMerge:
 - metrics-server.yaml
 #- vault.yaml
 #- fluentbit.yaml
 #- grafana.yaml
-#- argo-rollouts.yaml
+- argo-rollouts.yaml
 #- bluegreen-values.yaml
 #- canary-values.yaml
 #- kube-prometheus-stack.yaml
