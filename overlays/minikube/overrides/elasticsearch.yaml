@@ -1,0 +1,81 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: elasticsearch
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+  labels:
+    name: elasticsearch
+spec:
+  source:
+    targetRevision: "7.17.3"
+    helm:
+      values: |-
+        clusterName: "elasticsearch"
+        nodeGroup: "master"
+        roles:
+          master: "true"
+          ingest: "true"
+          data: "true"
+          remote_cluster_client: "true"
+          ml: "true"
+        replicas: 3
+        minimumMasterNodes: 2
+        image: "docker.elastic.co/elasticsearch/elasticsearch"
+        imageTag: "7.17.3"
+        imagePullPolicy: "IfNotPresent"
+        esJavaOpts: "-Xmx750m -Xms750m"
+        resources:
+          requests:
+            cpu: 1000m
+            memory: 1500Mi
+          limits:
+            memory: 1500Mi
+        volumeClaimTemplate:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 5Gi
+        extraContainers:
+        - name: cmds
+          image: busybox
+          command:
+          - sh
+          - -c
+          args:
+          - echo
+          - OK
+        clusterHealthCheckParams: "wait_for_status=green&timeout=1s"
+        ingress:
+          enabled: false
+          annotations: {}
+          className: "nginx"
+          pathtype: Prefix
+          hosts:
+            - host: elasticsearch.minikube.cloud
+              paths:
+                - path: /
+          tls: []
+        lifecycle:
+          {}
+          # preStop:
+          #   exec:
+          #     command: ["/bin/sh", "-c", "echo Hello from the postStart handler > /usr/share/message"]
+          # postStart:
+          #   exec:
+          #     command:
+          #       - bash
+          #       - -c
+          #       - |
+          #         #!/bin/bash
+          #         # Add a template to adjust number of shards/replicas
+          #         TEMPLATE_NAME=my_template
+          #         INDEX_PATTERN="logstash-*"
+          #         SHARD_COUNT=8
+          #         REPLICA_COUNT=1
+          #         ES_URL=http://localhost:9200
+          #         while [[ "$(curl -s -o /dev/null -w '%{http_code}\n' $ES_URL)" != "200" ]]; do sleep 1; done
+          #         curl -XPUT "$ES_URL/_template/$TEMPLATE_NAME" -H 'Content-Type: application/json' -d'{"index_patterns":['\""$INDEX_PATTERN"\"'],"settings":{"number_of_shards":'$SHARD_COUNT',"number_of_replicas":'$REPLICA_COUNT'}}'

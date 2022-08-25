@@ -3,9 +3,10 @@ kind: Kustomization
 bases:
 - ../../infra/projects
 #- ../../infra/apps/metrics-server
+- ../../infra/apps/elasticsearch
 #- ../../infra/apps/vault
 - ../../infra/apps/kube-prometheus-stack-crds
-- ../../infra/apps/kube-prometheus-stack
+#- ../../infra/apps/kube-prometheus-stack
 #- ../../infra/apps/argo-rollouts
 patchesStrategicMerge:
 #- ./overrides/metrics-server.yaml
@@ -15,5 +16,5 @@ patchesStrategicMerge:
 #- ./overrides/argo-rollouts.yaml
 #- bluegreen-values.yaml
 #- canary-values.yaml
-- ./overrides/kube-prometheus-stack.yaml
+#- ./overrides/kube-prometheus-stack.yaml
 #- flask-api-values.yaml
