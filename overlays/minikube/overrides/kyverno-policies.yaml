@@ -26,7 +26,9 @@ spec:
             - resources:
                 kinds:
                 - Daemonset
-                name: prometheus-stack-prometheus-node-exporter
+                selector:
+                  matchLabels:
+                    app: prometheus-node-exporter
                 namespaces:
                 - monitoring
           disallow-host-namespaces:
@@ -34,7 +36,9 @@ spec:
             - resources:
                 kinds:
                 - Daemonset
-                name: prometheus-stack-prometheus-node-exporter
+                selector:
+                  matchLabels:
+                    app: prometheus-node-exporter
                 namespaces:
                 - monitoring
           disallow-host-path:
@@ -42,6 +46,9 @@ spec:
             - resources:
                 kinds:
                 - Pod
+                selector:
+                  matchLabels:
+                    app: filebeat-filebeat
                 namespaces:
                 - monitoring
           run-as-non-root:
