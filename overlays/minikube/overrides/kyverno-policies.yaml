@@ -14,7 +14,7 @@ spec:
     targetRevision: "v2.5.5"
     helm:
       values: |-
-        podSecurityStandard: baseline
+        podSecurityStandard: restricted
         podSecuritySeverity: high
         podSecurityPolicies: []
         includeRestrictedPolicies: []
