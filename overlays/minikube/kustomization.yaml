@@ -8,7 +8,7 @@ bases:
 - ../../infra/apps/kube-prometheus-stack-crds
 - ../../infra/apps/kyverno
 - ../../infra/apps/kyverno-policies
-#- ../../infra/apps/kube-prometheus-stack
+- ../../infra/apps/kube-prometheus-stack
 #- ../../infra/apps/argo-rollouts
 patchesStrategicMerge:
 - ./overrides/metrics-server.yaml
@@ -18,7 +18,7 @@ patchesStrategicMerge:
 #- ./overrides/argo-rollouts.yaml
 #- bluegreen-values.yaml
 #- canary-values.yaml
-#- ./overrides/kube-prometheus-stack.yaml
+- ./overrides/kube-prometheus-stack.yaml
 #- flask-api-values.yaml
 - ./overrides/kyverno.yaml
 - ./overrides/kyverno-policies.yaml
