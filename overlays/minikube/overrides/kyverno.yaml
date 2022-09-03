@@ -16,8 +16,7 @@ spec:
       values: |-
         hostNetwork: true
         dnsPolicy: ClusterFirstWithHostNet
-        nodeSelector:
-          role: system
+        nodeSelector: {}
         resources:
           limits:
             memory: 256Mi
