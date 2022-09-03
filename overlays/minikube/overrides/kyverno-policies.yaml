@@ -15,7 +15,7 @@ spec:
     helm:
       values: |-
         podSecurityStandard: baseline
-        podSecuritySeverity: low
+        podSecuritySeverity: high
         podSecurityPolicies: []
         includeRestrictedPolicies: []
         failurePolicy: Fail
