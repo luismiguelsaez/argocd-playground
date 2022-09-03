@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kyverno-policies
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+  labels:
+    name: kyverno-policies
+spec:
+  source:
+    targetRevision: "v2.5.5"
+    helm:
+      values: |-
+        podSecurityStandard: baseline
+        podSecuritySeverity: low
+        podSecurityPolicies: []
+        includeRestrictedPolicies: []
+        failurePolicy: Fail
+        validationFailureAction: audit
+        policyExclude:
+          disallow-host-ports:
+            any:
+            - resources:
+                kinds:
+                - Daemonset
+                name: prometheus-stack-prometheus-node-exporter
+                namespaces:
+                - monitoring
+          disallow-host-namespaces:
+            any:
+            - resources:
+                kinds:
+                - Daemonset
+                name: prometheus-stack-prometheus-node-exporter
+                namespaces:
+                - monitoring
+          disallow-host-path:
+            any:
+            - resources:
+                kinds:
+                - Pod
+                namespaces:
+                - monitoring
+          run-as-non-root:
+            any:
+            - resources:
+                kinds:
+                - Pod
+                namespaces:
+                - monitoring
