@@ -9,7 +9,7 @@ bases:
 #- ../../infra/apps/kyverno
 #- ../../infra/apps/kyverno-policies
 - ../../infra/apps/gatekeeper
-#- ../../infra/apps/gatekeeper-policies
+- ../../infra/apps/gatekeeper-policies
 #- ../../infra/apps/kube-prometheus-stack
 #- ../../infra/apps/argo-rollouts
 patchesStrategicMerge:
