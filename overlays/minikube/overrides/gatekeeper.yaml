@@ -13,4 +13,11 @@ spec:
   source:
     targetRevision: "3.9.0"
     helm:
-      values: ""
+      values: |-
+        replicas: 1
+        psp:
+          enabled: false
+        upgradeCRDs:
+          enabled: true
+          tolerations: []
+          extraRules: []
