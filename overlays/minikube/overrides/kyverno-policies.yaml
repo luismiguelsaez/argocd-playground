@@ -19,7 +19,16 @@ spec:
         podSecurityPolicies: []
         includeRestrictedPolicies: []
         failurePolicy: Fail
-        validationFailureAction: audit
+        validationFailureAction: enforce
+        validationFailureActionOverrides:
+          all:
+            - action: audit
+              namespaces:
+                - argocd
+          disallow-host-path:
+            - action: audit
+              namespaces:
+                - monitoring
         policyExclude:
           disallow-host-ports:
             any:
