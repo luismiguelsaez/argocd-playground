@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: gatekeeper-policies
+  name: gatekeeper-templates
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   annotations:
     argocd.argoproj.io/sync-wave: "4"
   labels:
-    name: gatekeeper-policies
+    name: gatekeeper-templates
 spec:
   project: security
   source:
