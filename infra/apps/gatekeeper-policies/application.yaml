@@ -14,8 +14,11 @@ spec:
   source:
     repoURL: https://github.com/open-policy-agent/gatekeeper-library
     targetRevision: master
-    path: library/pod-security-policy/privileged-containers
+    path: library
     #kustomize: {}
+    #directory:
+    #  recurse: false
+    #  include:
   destination:
     server: https://kubernetes.default.svc
     namespace: security
