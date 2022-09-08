@@ -21,4 +21,4 @@ patchesStrategicMerge:
 #- ./overrides/kube-prometheus-stack.yaml
 - ./overrides/kyverno.yaml
 - ./overrides/kyverno-policies.yaml
-- ./overrides/gatekeeper.yaml
+#- ./overrides/gatekeeper.yaml
