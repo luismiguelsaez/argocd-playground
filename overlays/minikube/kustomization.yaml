@@ -5,8 +5,8 @@ bases:
 - ../../infra/apps/metrics-server
 - ../../infra/apps/kube-prometheus-stack-crds
 #- ../../infra/apps/kube-prometheus-stack
-- ../../infra/apps/kyverno
-#- ../../infra/apps/gatekeeper
+#- ../../infra/apps/kyverno
+- ../../infra/apps/gatekeeper
 #- ../../infra/apps/argo-rollouts
 #- ../../infra/apps/elasticsearch
 #- ../../infra/apps/vault
