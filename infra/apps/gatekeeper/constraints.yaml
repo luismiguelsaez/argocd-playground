@@ -13,7 +13,7 @@ spec:
   project: security
   source:
     repoURL: https://github.com/luismiguelsaez/k8s-playground
-    targetRevision: main
+    targetRevision: master
     path: security/opa/constraints
   destination:
     server: https://kubernetes.default.svc
