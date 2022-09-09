@@ -2,10 +2,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - kube-prometheus-crds
-  - kube-prometheus-stack
+  - kube-prometheus
   - metrics-server
   - fluentbit
   - grafana
   - argo-rollouts
   - argocd-extensions
+  - kyverno
+  - gatekeeper
