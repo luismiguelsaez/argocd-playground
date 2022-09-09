@@ -17,6 +17,6 @@ patchesStrategicMerge:
 #- ./overrides/grafana.yaml
 #- ./overrides/argo-rollouts.yaml
 #- ./overrides/kube-prometheus-stack.yaml
-- ./overrides/kyverno.yaml
-- ./overrides/kyverno-policies.yaml
-#- ./overrides/gatekeeper.yaml
+#- ./overrides/kyverno.yaml
+#- ./overrides/kyverno-policies.yaml
+- ./overrides/gatekeeper.yaml
