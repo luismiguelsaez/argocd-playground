@@ -1,30 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kyverno-policies
+  name: gatekeeper-constraints
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   annotations:
-    argocd.argoproj.io/sync-wave: "4"
+    argocd.argoproj.io/sync-wave: "6"
   labels:
-    name: kyverno-policies
+    name: gatekeeper-constraints
 spec:
   project: security
   source:
-    repoURL: https://kyverno.github.io/kyverno
-    targetRevision: "v2.5.5"
-    chart: kyverno-policies
-    helm:
-      values: ""
+    repoURL: https://github.com/luismiguelsaez/k8s-playground
+    targetRevision: main
+    path: security/opa/constraints
   destination:
     server: https://kubernetes.default.svc
     namespace: security
-  ignoreDifferences:
-  - group: "kyverno.io"
-    kind: "ClusterPolicy"
-    jsonPointers:
-    - /spec/rules
   syncPolicy:
     automated:
       prune: true

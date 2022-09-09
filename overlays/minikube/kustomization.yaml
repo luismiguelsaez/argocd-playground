@@ -3,15 +3,13 @@ kind: Kustomization
 bases:
 - ../../infra/projects
 - ../../infra/apps/metrics-server
+- ../../infra/apps/kube-prometheus-stack-crds
+#- ../../infra/apps/kube-prometheus-stack
+- ../../infra/apps/kyverno
+#- ../../infra/apps/gatekeeper
+#- ../../infra/apps/argo-rollouts
 #- ../../infra/apps/elasticsearch
 #- ../../infra/apps/vault
-- ../../infra/apps/kube-prometheus-stack-crds
-- ../../infra/apps/kyverno
-- ../../infra/apps/kyverno-policies
-#- ../../infra/apps/gatekeeper
-#- ../../infra/apps/gatekeeper-templates
-#- ../../infra/apps/kube-prometheus-stack
-#- ../../infra/apps/argo-rollouts
 patchesStrategicMerge:
 - ./overrides/metrics-server.yaml
 #- ./overrides/vault.yaml
