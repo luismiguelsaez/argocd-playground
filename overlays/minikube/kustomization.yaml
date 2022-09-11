@@ -3,8 +3,8 @@ kind: Kustomization
 bases:
 - ../../infra/projects
 - ../../infra/apps/metrics-server
-#- ../../infra/apps/kube-prometheus
-- ../../infra/apps/kube-prometheus/crds.yaml
+- ../../infra/apps/kube-prometheus
+#- ../../infra/apps/kube-prometheus/crds.yaml
 #- ../../infra/apps/kube-prometheus/stack.yaml
 #- ../../infra/apps/kyverno
 - ../../infra/apps/gatekeeper
