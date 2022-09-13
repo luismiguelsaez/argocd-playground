@@ -1,0 +1,117 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: falco
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+  labels:
+    name: falco
+spec:
+  source:
+    targetRevision: "2.0.17"
+    helm:
+      values: |-
+        fullnameOverride: "falco"
+        serviceAccount:
+          create: true
+          annotations: {}
+        podPriorityClassName:
+        nodeSelector: {}
+        controller:
+          kind: daemonset
+          daemonset:
+            updateStrategy:
+              type: RollingUpdate
+          deployment:
+            replicas: 1
+        resources:
+          requests:
+            cpu: 100m
+            memory: 512Mi
+          limits:
+            memory: 1024Mi
+        driver:
+          enabled: true
+          kind: module
+          ebpf:
+            path:
+            hostNetwork: false
+            leastPrivileged: false
+          loader:
+            enabled: true
+            initContainer:
+              enabled: true
+              image:
+                pullPolicy: IfNotPresent
+                registry: docker.io
+                repository: falcosecurity/falco-driver-loader
+                tag: ""
+              env: {}
+              args: []
+              resources: {}
+              securityContext:
+                privileged: true
+        collectors:
+          enabled: true
+          docker:
+            enabled: true
+            socket: /var/run/docker.sock
+          containerd:
+            enabled: false
+            socket: /run/containerd/containerd.sock
+          crio:
+            enabled: false
+            socket: /run/crio/crio.sock
+          kubernetes:
+            enabled: false
+            apiAuth: /var/run/secrets/kubernetes.io/serviceaccount/token
+            apiUrl: "https://$(KUBERNETES_SERVICE_HOST)"
+            enableNodeFilter: true
+        extra:
+          env: {}
+          args: []
+          initContainers: []
+        customRules: {}
+          # rules-custom.yaml: |-
+          #   [ rule body ]
+        falco:
+          rules_file:
+            - /etc/falco/falco_rules.yaml
+            - /etc/falco/falco_rules.local.yaml
+            - /etc/falco/rules.d
+          plugins:
+            - name: k8saudit
+              library_path: libk8saudit.so
+              init_config:
+              #   maxEventSize: 262144
+              #   webhookMaxBatchSize: 12582912
+              #   sslCertificate: /etc/falco/falco.pem
+              open_params: "http://:9765/k8s-audit"
+            - name: cloudtrail
+              library_path: libcloudtrail.so
+              # see docs for init_config and open_params:
+              # https://github.com/falcosecurity/plugins/blob/master/plugins/cloudtrail/README.md
+            - name: json
+              library_path: libjson.so
+              init_config: ""
+          load_plugins: []
+          json_output: true
+          json_include_output_property: true
+          json_include_tags_property: true
+          log_stderr: true
+          log_syslog: false
+          log_level: info
+          priority: notice
+          file_output:
+            enabled: false
+            keep_alive: false
+            filename: ./events.txt
+          stdout_output:
+            enabled: true
+          program_output:
+            enabled: false
+            keep_alive: false
+            program: "jq '{text: .output}' | curl -d @- -X POST https://hooks.slack.com/services/XXX"
