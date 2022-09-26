@@ -32,7 +32,7 @@ spec:
             enabled: true
             appProtocol: false
             type: LoadBalancer
-            enableHttp: true
+            enableHttp: false
             enableHttps: true
             ports:
               http: 80
@@ -47,7 +47,7 @@ spec:
               enable: true
               targetPort: http
             annotations:
-              service.beta.kubernetes.io/aws-load-balancer-name: k8s-nginx-ingress-main
+              service.beta.kubernetes.io/aws-load-balancer-name: k8s-ingress-nginx-test
               service.beta.kubernetes.io/aws-load-balancer-type: external
               service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
               service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: instance
@@ -63,3 +63,28 @@ spec:
               service.beta.kubernetes.io/aws-load-balancer-healthcheck-protocol: tcp
               service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: '/nginx-health'
               service.beta.kubernetes.io/aws-load-balancer-healthcheck-timeout: '10'
+          metrics:
+            enabled: true
+            port: 10254
+            serviceMonitor:
+              enabled: true
+              additionalLabels: {}
+              namespace: ""
+              namespaceSelector: {}
+              scrapeInterval: 15s
+              targetLabels: []
+              relabelings: []
+              metricRelabelings: []
+            prometheusRule:
+              enabled: false
+              additionalLabels: {}
+              rules: []
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                  - /wait-shutdown
+        admissionWebhooks:
+          enabled: true
+          
+
