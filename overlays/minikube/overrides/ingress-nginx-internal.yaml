@@ -1,0 +1,94 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-nginx-internal
+  namespace: argocd
+spec:
+  source:
+    targetRevision: "4.2.5"
+    helm:
+      values: |-
+        fullnameOverride: ingress-nginx-internal
+        controller:
+          addHeaders: {}
+          priorityClassName: system-node-critical
+          ingressClassByName: true
+          ingressClass: nginx-internal
+          ingressClassResource:
+            name: nginx-internal
+            enabled: true
+            default: false
+            controllerValue: "k8s.io/ingress-nginx-internal"
+          electionID: ingress-controller-internal-leader
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          kind: DaemonSet
+          nodeSelector:
+            kubernetes.io/os: linux
+            role: system
+          healthCheckPath: /healthz
+          service:
+            enabled: true
+            appProtocol: false
+            type: LoadBalancer
+            enableHttp: false
+            enableHttps: true
+            ports:
+              http: 80
+              https: 443
+            targetPorts:
+              http: http
+              https: http
+            httpPort:
+              enable: false
+              targetPort: http
+            httpsPort:
+              enable: true
+              targetPort: http
+            annotations:
+              service.beta.kubernetes.io/aws-load-balancer-name: ingress-nginx-internal
+              service.beta.kubernetes.io/aws-load-balancer-type: nlb-ip
+              service.beta.kubernetes.io/aws-load-balancer-scheme: internal
+              service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: instance
+              service.beta.kubernetes.io/aws-load-balancer-target-node-labels: role=system
+              service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+              service.beta.kubernetes.io/load-balancer-source-ranges: 0.0.0.0/0
+              service.beta.kubernetes.io/aws-load-balancer-manage-backend-security-group-rules: 'true'
+              service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: '300'
+              service.beta.kubernetes.io/aws-load-balancer-attributes: load_balancing.cross_zone.enabled=true
+              service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:eu-central-1:484308071187:certificate/aca221b6-0f15-4d58-b1f3-fd27fc14c67a
+              service.beta.kubernetes.io/aws-load-balancer-ssl-ports: '443'
+              service.beta.kubernetes.io/aws-load-balancer-ssl-negotiation-policy: ELBSecurityPolicy-TLS13-1-2-2021-06
+              service.beta.kubernetes.io/aws-load-balancer-healthcheck-protocol: tcp
+              service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: '/nginx-health'
+              service.beta.kubernetes.io/aws-load-balancer-healthcheck-timeout: '10'
+          metrics:
+            enabled: true
+            port: 10254
+            serviceMonitor:
+              enabled: true
+              additionalLabels: {}
+              namespace: ""
+              namespaceSelector: {}
+              scrapeInterval: 15s
+              targetLabels: []
+              relabelings: []
+              metricRelabelings: []
+            prometheusRule:
+              enabled: false
+              additionalLabels: {}
+              rules: []
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                  - /wait-shutdown
+        admissionWebhooks:
+          enabled: true
+          
+
