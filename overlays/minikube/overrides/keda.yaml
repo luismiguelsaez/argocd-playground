@@ -1,0 +1,99 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keda
+  namespace: argocd
+spec:
+  source:
+    targetRevision: "2.8.2"
+    helm:
+      values: |-
+        nodeSelector:
+          role: system
+        priorityClassName: ""
+        additionalLabels: {}
+        rbac:
+          create: true
+        serviceAccount:
+          create: true
+          name: keda-operator
+          automountServiceAccountToken: true
+          annotations: {}
+        operator:
+          name: keda-operator
+          replicaCount: 3
+          affinity: {}
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                    - keda-operator
+                topologyKey: "kubernetes.io/hostname"
+        metricsServer:
+          replicaCount: 3
+          dnsPolicy: ClusterFirst
+          useHostNetwork: false
+          affinity: {}
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                    - keda-operator-metrics-apiserver
+                topologyKey: "kubernetes.io/hostname"
+        logging:
+          operator:
+            level: info
+            format: json
+            timeEncoding: rfc3339
+          metricServer:
+            level: 0
+        resources:
+          operator:
+            limits:
+              cpu: 1
+              memory: 1000Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          metricServer:
+            limits:
+              cpu: 1
+              memory: 1000Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+        prometheus:
+          metricServer:
+            enabled: true
+            port: 9022
+            portName: metrics
+            path: /metrics
+            podMonitor:
+              enabled: false
+              interval:
+              scrapeTimeout:
+              namespace:
+              additionalLabels: {}
+              relabelings: []
+          operator:
+            enabled: true
+            port: 8080
+            path: /metrics
+            podMonitor:
+              enabled: false
+              interval:
+              scrapeTimeout:
+              namespace:
+              additionalLabels: {}
+              relabelings: []
+            prometheusRules:
+              enabled: false
+              namespace:
+              additionalLabels: {}
+              alerts: []
