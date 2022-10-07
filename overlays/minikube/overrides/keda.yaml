@@ -22,7 +22,7 @@ spec:
         operator:
           name: keda-operator
           replicaCount: 3
-          affinity: {}
+          affinity:
             podAntiAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
               - labelSelector:
@@ -36,7 +36,7 @@ spec:
           replicaCount: 3
           dnsPolicy: ClusterFirst
           useHostNetwork: false
-          affinity: {}
+          affinity:
             podAntiAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
               - labelSelector:
