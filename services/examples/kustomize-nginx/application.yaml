@@ -15,7 +15,7 @@ spec:
   source:
     repoURL: https://github.com/luismiguelsaez/kustomize-playground
     targetRevision: main
-    path: overlays/dev
+    path: nginx/overlays/dev
     helm:
       values: ""
   destination:
