@@ -116,7 +116,7 @@ spec:
               alerts: []
   destination:
     server: https://kubernetes.default.svc
-    namespace: system
+    namespace: kube-system
   syncPolicy:
     automated:
       prune: true
