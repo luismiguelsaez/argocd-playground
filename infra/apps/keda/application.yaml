@@ -16,10 +16,107 @@ spec:
     targetRevision: "2.8.2"
     chart: keda
     helm:
-      values: ""
+      values: |-
+        nodeSelector:
+          role: system
+        priorityClassName: ""
+        podLabels:
+          infra/app: keda
+        additionalLabels: {}
+        logging:
+          operator:
+            level: debug
+            format: json
+          metricServer:
+            level: 0
+        rbac:
+          create: true
+        serviceAccount:
+          create: true
+          name: keda-operator
+          automountServiceAccountToken: true
+          annotations: {}
+        operator:
+          name: keda-operator
+          replicaCount: 3
+          affinity:
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                    - keda-operator
+                topologyKey: "kubernetes.io/hostname"
+        metricsServer:
+          replicaCount: 3
+          dnsPolicy: ClusterFirst
+          useHostNetwork: false
+          affinity:
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                    - keda-operator-metrics-apiserver
+                topologyKey: "kubernetes.io/hostname"
+        logging:
+          operator:
+            level: info
+            format: json
+            timeEncoding: rfc3339
+          metricServer:
+            level: 0
+        resources:
+          operator:
+            limits:
+              cpu: 1
+              memory: 1000Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          metricServer:
+            limits:
+              cpu: 1
+              memory: 1000Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+        prometheus:
+          metricServer:
+            enabled: true
+            port: 9022
+            portName: metrics
+            path: /metrics
+            podMonitor:
+              enabled: true
+              interval:
+              scrapeTimeout:
+              namespace:
+              additionalLabels: {}
+              relabelings: []
+          operator:
+            enabled: true
+            port: 8080
+            path: /metrics
+            podMonitor:
+              enabled: true
+              interval:
+              scrapeTimeout:
+              namespace:
+              additionalLabels: {}
+              relabelings: []
+            prometheusRules:
+              enabled: false
+              namespace:
+              additionalLabels: {}
+              alerts: []
   destination:
     server: https://kubernetes.default.svc
-    namespace: kube-system
+    namespace: keda
   syncPolicy:
     automated:
       prune: true

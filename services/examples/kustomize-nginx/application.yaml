@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kustomize-nginx
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    templating/app: kustomize
+    app: nginx
+spec:
+  project: examples
+  source:
+    repoURL: https://github.com/luismiguelsaez/kustomize-playground
+    targetRevision: main
+    path: overlays/dev
+    helm:
+      values: ""
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: examples
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+    - Validate=true
+    - CreateNamespace=true
+    - PrunePropagationPolicy=foreground
+    - PruneLast=false
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 2m
