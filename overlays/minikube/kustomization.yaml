@@ -12,6 +12,7 @@ bases:
 #- ../../infra/apps/argo-rollouts
 #- ../../infra/apps/elasticsearch
 #- ../../infra/apps/vault
+- ../../services/projects
 - ../../services/examples/kustomize-nginx
 patchesStrategicMerge:
 - ./overrides/metrics-server.yaml
