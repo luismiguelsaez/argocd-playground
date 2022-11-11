@@ -116,7 +116,7 @@ spec:
               alerts: []
   destination:
     server: https://kubernetes.default.svc
-    namespace: keda
+    namespace: system
   syncPolicy:
     automated:
       prune: true
